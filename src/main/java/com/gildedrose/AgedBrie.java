@@ -1,7 +1,7 @@
 package com.gildedrose;
 
-public class AgedBrie implements GildedRoseItem {
-    public final Item item;
+public class AgedBrie extends GildedRoseItem {
+    private final Item item;
 
     public AgedBrie(Item item) {
         this.item = item;

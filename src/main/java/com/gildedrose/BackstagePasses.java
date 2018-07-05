@@ -1,7 +1,7 @@
 package com.gildedrose;
 
-public class BackstagePasses implements GildedRoseItem {
-    public final Item item;
+public class BackstagePasses extends GildedRoseItem {
+    private final Item item;
 
     public BackstagePasses(Item item) {
         this.item = item;

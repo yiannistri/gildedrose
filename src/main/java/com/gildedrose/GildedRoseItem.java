@@ -1,7 +1,7 @@
 package com.gildedrose;
 
-public interface GildedRoseItem {
-    void updateQuality();
+public abstract class GildedRoseItem {
+    abstract void updateQuality();
 
     static GildedRoseItem gildedRoseItem(Item item) {
         if (item.name.equals(GildedRose.AGED_BRIE)) {
@@ -11,7 +11,7 @@ public interface GildedRoseItem {
             return new BackstagePasses(item);
         }
         if (item.name.equals(GildedRose.SULFURAS)) {
-            return new Sulfuras(item);
+            return new Sulfuras();
         }
         return new OtherItem(item);
     }
