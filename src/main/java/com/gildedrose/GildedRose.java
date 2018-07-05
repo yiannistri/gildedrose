@@ -13,17 +13,11 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            boolean isBrie = item.name.equals(AGED_BRIE);
-            boolean isBackstagePasses = item.name.equals(BACKSTAGE_PASSES);
-            boolean isSulfuras = item.name.equals(SULFURAS);
-
-            boolean getsBetterWithAge = isBrie || isBackstagePasses;
-
-            if (getsBetterWithAge) {
+            if (getsBetterWithAge(item)) {
                 if (item.quality < 50) {
                     item.quality = item.quality + 1;
 
-                    if (isBackstagePasses) {
+                    if (isBackstagePasses(item)) {
                         if (item.sellIn < 11) {
                             if (item.quality < 50) {
                                 item.quality = item.quality + 1;
@@ -38,34 +32,50 @@ class GildedRose {
                     }
                 }
             } else {
-                if (item.quality > 0) {
-                    if (!isSulfuras) {
-                        item.quality = item.quality - 1;
-                    }
-                }
+                reduce(item);
             }
 
-            if (!isSulfuras) {
+            if (!isSulfuras(item)) {
                 item.sellIn = item.sellIn - 1;
             }
 
             if (item.sellIn < 0) {
-                if (isBrie) {
+                if (isBrie(item)) {
                     if (item.quality < 50) {
                         item.quality = item.quality + 1;
                     }
                 } else {
-                    if (isBackstagePasses) {
+                    if (isBackstagePasses(item)) {
                         item.quality = 0;
                     } else {
-                        if (item.quality > 0) {
-                            if (!isSulfuras) {
-                                item.quality = item.quality - 1;
-                            }
-                        }
+                        reduce(item);
                     }
                 }
             }
         }
+    }
+
+    private boolean getsBetterWithAge(Item item) {
+        return isBrie(item) || isBackstagePasses(item);
+    }
+
+    private boolean isBackstagePasses(Item item) {
+        return item.name.equals(BACKSTAGE_PASSES);
+    }
+
+    private boolean isBrie(Item item) {
+        return item.name.equals(AGED_BRIE);
+    }
+
+    private void reduce(Item item) {
+        if (item.quality > 0) {
+            if (!isSulfuras(item)) {
+                item.quality = item.quality - 1;
+            }
+        }
+    }
+
+    private boolean isSulfuras(Item item) {
+        return item.name.equals(SULFURAS);
     }
 }
