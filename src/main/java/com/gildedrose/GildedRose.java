@@ -13,7 +13,7 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            new GildedRoseItem(item).updateQuality();
+            GildedRoseItem.gildedRoseItem(item).updateQuality();
         }
     }
 }
