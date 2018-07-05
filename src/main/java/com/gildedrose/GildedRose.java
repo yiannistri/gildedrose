@@ -13,12 +13,17 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            boolean getsBetterWithAge = item.name.equals(AGED_BRIE) || item.name.equals(BACKSTAGE_PASSES);
+            boolean isBrie = item.name.equals(AGED_BRIE);
+            boolean isBackstagePasses = item.name.equals(BACKSTAGE_PASSES);
+            boolean isSulfuras = item.name.equals(SULFURAS);
+
+            boolean getsBetterWithAge = isBrie || isBackstagePasses;
+
             if (getsBetterWithAge) {
                 if (item.quality < 50) {
                     item.quality = item.quality + 1;
 
-                    if (item.name.equals(BACKSTAGE_PASSES)) {
+                    if (isBackstagePasses) {
                         if (item.sellIn < 11) {
                             if (item.quality < 50) {
                                 item.quality = item.quality + 1;
@@ -34,30 +39,30 @@ class GildedRose {
                 }
             } else {
                 if (item.quality > 0) {
-                    if (!item.name.equals(SULFURAS)) {
+                    if (!isSulfuras) {
                         item.quality = item.quality - 1;
                     }
                 }
             }
 
-            if (!item.name.equals(SULFURAS)) {
+            if (!isSulfuras) {
                 item.sellIn = item.sellIn - 1;
             }
 
             if (item.sellIn < 0) {
-                if (!item.name.equals(AGED_BRIE)) {
-                    if (!item.name.equals(BACKSTAGE_PASSES)) {
+                if (isBrie) {
+                    if (item.quality < 50) {
+                        item.quality = item.quality + 1;
+                    }
+                } else {
+                    if (isBackstagePasses) {
+                        item.quality = 0;
+                    } else {
                         if (item.quality > 0) {
-                            if (!item.name.equals(SULFURAS)) {
+                            if (!isSulfuras) {
                                 item.quality = item.quality - 1;
                             }
                         }
-                    } else {
-                        item.quality = 0;
-                    }
-                } else {
-                    if (item.quality < 50) {
-                        item.quality = item.quality + 1;
                     }
                 }
             }
