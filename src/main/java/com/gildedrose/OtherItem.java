@@ -9,18 +9,16 @@ public class OtherItem extends AbstractGildedRoseItem {
 
     @Override
     public void updateQuality() {
-        ageBadly(item);
+        if (item.quality > 0) {
+            item.quality = item.quality - 1;
+        }
 
         item.sellIn = item.sellIn - 1;
 
         if (hasExpired(item)) {
-            ageBadly(item);
-        }
-    }
-
-    private void ageBadly(Item item) {
-        if (item.quality > 0) {
-            item.quality = item.quality - 1;
+            if (item.quality > 0) {
+                item.quality = item.quality - 1;
+            }
         }
     }
 }

@@ -9,20 +9,12 @@ public class AgedBrie extends AbstractGildedRoseItem {
 
     @Override
     public void updateQuality() {
-        ageWell(item);
+        incrementQuality(item);
 
         item.sellIn = item.sellIn - 1;
 
         if (hasExpired(item)) {
-            if (item.quality < 50) {
-                item.quality = item.quality + 1;
-            }
-        }
-    }
-
-    private void ageWell(Item item) {
-        if (item.quality < 50) {
-            item.quality = item.quality + 1;
+            incrementQuality(item);
         }
     }
 }
