@@ -2,7 +2,7 @@ package com.gildedrose;
 
 import static com.gildedrose.GildedRose.*;
 
-public class EverythingGildedRoseItem implements GildedRoseItem {
+public abstract class EverythingGildedRoseItem implements GildedRoseItem {
     public final Item item;
 
     public EverythingGildedRoseItem(Item item) {

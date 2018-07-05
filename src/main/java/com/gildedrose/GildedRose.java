@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import static com.gildedrose.GildedRoseItem.gildedRoseItem;
+
 class GildedRose {
     public static final String AGED_BRIE = "Aged Brie";
     public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
@@ -13,7 +15,7 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            GildedRoseItem.gildedRoseItem(item).updateQuality();
+            gildedRoseItem(item).updateQuality();
         }
     }
 }
