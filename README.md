@@ -1,8 +1,15 @@
 # COPIED from https://github.com/emilybache/GildedRose-Refactoring-Kata
 
-repackaged for a lab
+Repackaged for a lab.
 
-** Follow the instructions in [GildedRoseRequirements.txt](https://github.com/ivanmoore/gildedrose/blob/master/GildedRoseRequirements.txt) - the rest of this is included for background only **
+Import into IntelliJ using "Import project from external model" -> "Maven" (not Gradle!).
+
+Two tests are included:
+
+- `GildedRoseTest` - which is a not-very-useful unit test - but at least provides a placeholder for further unit tests.
+- `TextTest` - which provides a regression test - I haven't confirmed whether it is really useful but it could be.
+
+**Follow the instructions in [GildedRoseRequirements.txt](https://github.com/ivanmoore/gildedrose/blob/master/GildedRoseRequirements.txt) - the rest of this is included for background only**
 
 # Gilded Rose Refactoring Kata
 
