@@ -14,32 +14,16 @@ class GildedRose {
     public void updateQuality() {
         for (Item item : items) {
             if (getsBetterWithAge(item)) {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-
-                    if (isBackstagePasses(item)) {
-                        if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-
-                        if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-                    }
-                }
+                ageWell(item);
             } else {
-                reduce(item);
+                ageBadly(item);
             }
 
             if (!isSulfuras(item)) {
                 item.sellIn = item.sellIn - 1;
             }
 
-            if (item.sellIn < 0) {
+            if (hasExpired(item)) {
                 if (isBrie(item)) {
                     if (item.quality < 50) {
                         item.quality = item.quality + 1;
@@ -48,7 +32,31 @@ class GildedRose {
                     if (isBackstagePasses(item)) {
                         item.quality = 0;
                     } else {
-                        reduce(item);
+                        ageBadly(item);
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean hasExpired(Item item) {
+        return item.sellIn < 0;
+    }
+
+    private void ageWell(Item item) {
+        if (item.quality < 50) {
+            item.quality = item.quality + 1;
+
+            if (isBackstagePasses(item)) {
+                if (item.sellIn < 11) {
+                    if (item.quality < 50) {
+                        item.quality = item.quality + 1;
+                    }
+                }
+
+                if (item.sellIn < 6) {
+                    if (item.quality < 50) {
+                        item.quality = item.quality + 1;
                     }
                 }
             }
@@ -67,7 +75,7 @@ class GildedRose {
         return item.name.equals(AGED_BRIE);
     }
 
-    private void reduce(Item item) {
+    private void ageBadly(Item item) {
         if (item.quality > 0) {
             if (!isSulfuras(item)) {
                 item.quality = item.quality - 1;
