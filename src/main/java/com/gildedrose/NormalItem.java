@@ -1,20 +1,20 @@
 package com.gildedrose;
 
-public class AgedBrie extends AbstractGildedRoseItem {
+public class NormalItem extends AbstractGildedRoseItem {
     private final Item item;
 
-    public AgedBrie(Item item) {
+    public NormalItem(Item item) {
         this.item = item;
     }
 
     @Override
     public void updateQuality() {
-        incrementQuality(item);
+        decreaseQuality(item);
 
         decrementSellIn(item);
 
         if (hasExpired(item)) {
-            incrementQuality(item);
+            decreaseQuality(item);
         }
     }
 }

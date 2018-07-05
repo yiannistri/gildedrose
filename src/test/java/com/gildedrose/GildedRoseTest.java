@@ -51,10 +51,11 @@ public class GildedRoseTest {
     }
 
     @Test
-    public void sellInDecreasesEveryDayForUnknownItem() {
+    public void sellInDecreasesEveryDayForMostItems() {
         sellInDecreasesEveryDayForItem(new Item("foo", 2, 0));
         sellInDecreasesEveryDayForItem(new Item(GildedRose.BACKSTAGE_PASSES, 2, 0));
         sellInDecreasesEveryDayForItem(new Item(GildedRose.AGED_BRIE, 2, 0));
+        sellInDecreasesEveryDayForItem(new Item(GildedRose.CONJURED, 2, 0));
     }
 
     @Test

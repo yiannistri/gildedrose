@@ -11,7 +11,7 @@ public class BackstagePasses extends AbstractGildedRoseItem {
     public void updateQuality() {
         ageWell(item);
 
-        item.sellIn = item.sellIn - 1;
+        decrementSellIn(item);
 
         if (hasExpired(item)) {
             item.quality = 0;

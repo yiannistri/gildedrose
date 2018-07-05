@@ -11,7 +11,10 @@ public interface GildedRoseItem {
         if (item.name.equals(GildedRose.SULFURAS)) {
             return new Sulfuras();
         }
-        return new OtherItem(item);
+        if (item.name.equals(GildedRose.CONJURED)) {
+            return new ConjuredItem(item);
+        }
+        return new NormalItem(item);
     }
 
     void updateQuality();
