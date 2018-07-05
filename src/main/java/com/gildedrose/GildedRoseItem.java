@@ -1,8 +1,6 @@
 package com.gildedrose;
 
-public abstract class GildedRoseItem {
-    abstract void updateQuality();
-
+public interface GildedRoseItem {
     static GildedRoseItem gildedRoseItem(Item item) {
         if (item.name.equals(GildedRose.AGED_BRIE)) {
             return new AgedBrie(item);
@@ -15,4 +13,6 @@ public abstract class GildedRoseItem {
         }
         return new OtherItem(item);
     }
+
+    void updateQuality();
 }

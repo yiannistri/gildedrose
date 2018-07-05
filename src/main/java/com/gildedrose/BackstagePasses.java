@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-public class BackstagePasses extends GildedRoseItem {
+public class BackstagePasses extends AbstractGildedRoseItem {
     private final Item item;
 
     public BackstagePasses(Item item) {
@@ -16,10 +16,6 @@ public class BackstagePasses extends GildedRoseItem {
         if (hasExpired(item)) {
             item.quality = 0;
         }
-    }
-
-    private boolean hasExpired(Item item) {
-        return item.sellIn < 0;
     }
 
     private void ageWell(Item item) {

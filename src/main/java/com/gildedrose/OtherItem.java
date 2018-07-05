@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-public class OtherItem extends GildedRoseItem {
+public class OtherItem extends AbstractGildedRoseItem {
     private final Item item;
 
     public OtherItem(Item item) {
@@ -16,10 +16,6 @@ public class OtherItem extends GildedRoseItem {
         if (hasExpired(item)) {
             ageBadly(item);
         }
-    }
-
-    private boolean hasExpired(Item item) {
-        return item.sellIn < 0;
     }
 
     private void ageBadly(Item item) {
