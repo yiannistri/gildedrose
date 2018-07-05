@@ -13,27 +13,31 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            if (getsBetterWithAge(item)) {
-                ageWell(item);
+            updateQuality(item);
+        }
+    }
+
+    private void updateQuality(Item item) {
+        if (getsBetterWithAge(item)) {
+            ageWell(item);
+        } else {
+            ageBadly(item);
+        }
+
+        if (!isSulfuras(item)) {
+            item.sellIn = item.sellIn - 1;
+        }
+
+        if (hasExpired(item)) {
+            if (isBrie(item)) {
+                if (item.quality < 50) {
+                    item.quality = item.quality + 1;
+                }
             } else {
-                ageBadly(item);
-            }
-
-            if (!isSulfuras(item)) {
-                item.sellIn = item.sellIn - 1;
-            }
-
-            if (hasExpired(item)) {
-                if (isBrie(item)) {
-                    if (item.quality < 50) {
-                        item.quality = item.quality + 1;
-                    }
+                if (isBackstagePasses(item)) {
+                    item.quality = 0;
                 } else {
-                    if (isBackstagePasses(item)) {
-                        item.quality = 0;
-                    } else {
-                        ageBadly(item);
-                    }
+                    ageBadly(item);
                 }
             }
         }
@@ -63,6 +67,14 @@ class GildedRose {
         }
     }
 
+    private void ageBadly(Item item) {
+        if (item.quality > 0) {
+            if (!isSulfuras(item)) {
+                item.quality = item.quality - 1;
+            }
+        }
+    }
+
     private boolean getsBetterWithAge(Item item) {
         return isBrie(item) || isBackstagePasses(item);
     }
@@ -73,14 +85,6 @@ class GildedRose {
 
     private boolean isBrie(Item item) {
         return item.name.equals(AGED_BRIE);
-    }
-
-    private void ageBadly(Item item) {
-        if (item.quality > 0) {
-            if (!isSulfuras(item)) {
-                item.quality = item.quality - 1;
-            }
-        }
     }
 
     private boolean isSulfuras(Item item) {
