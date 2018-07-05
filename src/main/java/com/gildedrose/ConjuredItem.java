@@ -1,16 +1,13 @@
 package com.gildedrose;
 
-public class ConjuredItem extends AbstractGildedRoseItem {
-    private final Item item;
-
+public class ConjuredItem extends NormalItem {
     public ConjuredItem(Item item) {
-        this.item = item;
+        super(item);
     }
 
     @Override
-    public void updateQuality() {
-        decreaseQuality(item);
-        decreaseQuality(item);
-        decrementSellIn(item);
+    void decreaseQuality(Item item) {
+        super.decreaseQuality(item);
+        super.decreaseQuality(item);
     }
 }
