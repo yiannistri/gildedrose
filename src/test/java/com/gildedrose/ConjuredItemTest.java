@@ -8,7 +8,7 @@ import static junit.framework.TestCase.assertEquals;
 public class ConjuredItemTest {
     @Test
     public void degradesTwiceAsFastAsNormalItems() {
-        Item c = new Item("Conjured", 10, 10);
+        Item c = new Item("Conjured Mana Cake", 10, 10);
         GildedRoseItem conjured = gildedRoseItem(c);
 
         assertEquals(10, c.quality);
