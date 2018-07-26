@@ -1,10 +1,23 @@
 package com.gildedrose;
 
-public class GildedRoseItem {
+public abstract class GildedRoseItem {
     private final Item item;
 
     private GildedRoseItem(Item item) {
         this.item = item;
+    }
+
+    public static GildedRoseItem gildedRoseItem(Item item) {
+        if (isAgedBrie(item)) {
+            return new AgedBrie(item);
+        }
+        if (isBackstagePasses(item)) {
+            return new BackstagePasses(item);
+        }
+        if (isSulfuras(item)) {
+            return new Sulfuras(item);
+        }
+        return new Normal(item);
     }
 
     public static boolean isSulfuras(Item item) {
@@ -17,10 +30,6 @@ public class GildedRoseItem {
 
     public static boolean isAgedBrie(Item item) {
         return item.name.equals("Aged Brie");
-    }
-
-    public static GildedRoseItem gildedRoseItem(Item item) {
-        return new GildedRoseItem(item);
     }
 
     public void updateQuality() {
@@ -98,5 +107,29 @@ public class GildedRoseItem {
 
     public boolean isAgedBrie() {
         return isAgedBrie(item);
+    }
+
+    private static class AgedBrie extends GildedRoseItem {
+        public AgedBrie(Item item) {
+            super(item);
+        }
+    }
+
+    private static class BackstagePasses extends GildedRoseItem {
+        public BackstagePasses(Item item) {
+            super(item);
+        }
+    }
+
+    private static class Sulfuras extends GildedRoseItem {
+        public Sulfuras(Item item) {
+            super(item);
+        }
+    }
+
+    private static class Normal extends GildedRoseItem {
+        public Normal(Item item) {
+            super(item);
+        }
     }
 }
