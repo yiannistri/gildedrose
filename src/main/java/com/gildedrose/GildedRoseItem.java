@@ -36,40 +36,67 @@ public class GildedRoseItem {
     }
 
     public void updateQuality() {
-        Item item = this.item;
-        if (isAgedBrie(item) || isBackstagePasses(item)) {
-            incrementQuality(item);
-            if (isBackstagePasses(item)) {
-                if (item.sellIn < 11) {
-                    incrementQuality(item);
+        if (isAgedBrie() || isBackstagePasses()) {
+            incrementQuality();
+            if (isBackstagePasses()) {
+                if (expiresBy(11)) {
+                    incrementQuality();
                 }
 
-                if (item.sellIn < 6) {
-                    incrementQuality(item);
+                if (expiresBy(6)) {
+                    incrementQuality();
                 }
             }
         } else {
-            if (!isSulfuras(item)) {
-                decrementQuality(item);
+            if (!isSulfuras()) {
+                decrementQuality();
             }
         }
 
-        if (!isSulfuras(item)) {
+        if (!isSulfuras()) {
             item.sellIn = item.sellIn - 1;
         }
 
-        if (item.sellIn < 0) {
-            if (isAgedBrie(item)) {
-                incrementQuality(item);
+        if (hasExpired()) {
+            if (isAgedBrie()) {
+                incrementQuality();
             } else {
-                if (isBackstagePasses(item)) {
+                if (isBackstagePasses()) {
                     item.quality = 0;
                 } else {
-                    if (!isSulfuras(item)) {
-                        decrementQuality(item);
+                    if (!isSulfuras()) {
+                        decrementQuality();
                     }
                 }
             }
         }
+    }
+
+    public boolean hasExpired() {
+        return expiresBy(0);
+    }
+
+    public boolean expiresBy(int expiryTime) {
+        return item.sellIn < expiryTime;
+    }
+
+    public void decrementQuality() {
+        decrementQuality(item);
+    }
+
+    public boolean isSulfuras() {
+        return isSulfuras(item);
+    }
+
+    public boolean isBackstagePasses() {
+        return isBackstagePasses(item);
+    }
+
+    public void incrementQuality() {
+        incrementQuality(item);
+    }
+
+    public boolean isAgedBrie() {
+        return isAgedBrie(item);
     }
 }
