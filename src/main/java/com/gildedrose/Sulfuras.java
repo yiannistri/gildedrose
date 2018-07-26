@@ -1,10 +1,6 @@
 package com.gildedrose;
 
-class Sulfuras extends AbstractGildedRoseItem {
-    public Sulfuras(Item item) {
-        super(item);
-    }
-
+class Sulfuras implements GildedRoseItem {
     @Override
     public void updateQuality() {
     }

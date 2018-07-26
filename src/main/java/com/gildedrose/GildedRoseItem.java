@@ -9,7 +9,7 @@ public interface GildedRoseItem {
             return new BackstagePasses(item);
         }
         if (isSulfuras(item)) {
-            return new Sulfuras(item);
+            return new Sulfuras();
         }
         return new Normal(item);
     }
