@@ -1,22 +1,10 @@
 package com.gildedrose;
 
 public class GildedRoseItem {
-    final Item item;
+    private final Item item;
 
     private GildedRoseItem(Item item) {
         this.item = item;
-    }
-
-    public static void decrementQuality(Item item) {
-        if (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
-    }
-
-    public static void incrementQuality(Item item) {
-        if (item.quality < 50) {
-            item.quality = item.quality + 1;
-        }
     }
 
     public static boolean isSulfuras(Item item) {
@@ -54,7 +42,7 @@ public class GildedRoseItem {
         }
 
         if (!isSulfuras()) {
-            item.sellIn = item.sellIn - 1;
+            decrementSellIn();
         }
 
         if (hasExpired()) {
@@ -62,7 +50,7 @@ public class GildedRoseItem {
                 incrementQuality();
             } else {
                 if (isBackstagePasses()) {
-                    item.quality = 0;
+                    setNoQuality();
                 } else {
                     if (!isSulfuras()) {
                         decrementQuality();
@@ -70,6 +58,14 @@ public class GildedRoseItem {
                 }
             }
         }
+    }
+
+    public void setNoQuality() {
+        item.quality = 0;
+    }
+
+    public void decrementSellIn() {
+        item.sellIn = item.sellIn - 1;
     }
 
     public boolean hasExpired() {
@@ -81,7 +77,15 @@ public class GildedRoseItem {
     }
 
     public void decrementQuality() {
-        decrementQuality(item);
+        if (item.quality > 0) {
+            item.quality = item.quality - 1;
+        }
+    }
+
+    public void incrementQuality() {
+        if (item.quality < 50) {
+            item.quality = item.quality + 1;
+        }
     }
 
     public boolean isSulfuras() {
@@ -90,10 +94,6 @@ public class GildedRoseItem {
 
     public boolean isBackstagePasses() {
         return isBackstagePasses(item);
-    }
-
-    public void incrementQuality() {
-        incrementQuality(item);
     }
 
     public boolean isAgedBrie() {
