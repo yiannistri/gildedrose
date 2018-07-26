@@ -1,48 +1,10 @@
 package com.gildedrose;
 
 public abstract class AbstractGildedRoseItem implements GildedRoseItem {
-    private final Item item;
+    final Item item;
 
     AbstractGildedRoseItem(Item item) {
         this.item = item;
-    }
-
-    @Override
-    public void updateQuality() {
-        if (isAgedBrie() || isBackstagePasses()) {
-            incrementQuality();
-            if (isBackstagePasses()) {
-                if (expiresBy(11)) {
-                    incrementQuality();
-                }
-
-                if (expiresBy(6)) {
-                    incrementQuality();
-                }
-            }
-        } else {
-            if (!isSulfuras()) {
-                decrementQuality();
-            }
-        }
-
-        if (!isSulfuras()) {
-            decrementSellIn();
-        }
-
-        if (hasExpired()) {
-            if (isAgedBrie()) {
-                incrementQuality();
-            } else {
-                if (isBackstagePasses()) {
-                    setNoQuality();
-                } else {
-                    if (!isSulfuras()) {
-                        decrementQuality();
-                    }
-                }
-            }
-        }
     }
 
     public void setNoQuality() {
@@ -73,15 +35,4 @@ public abstract class AbstractGildedRoseItem implements GildedRoseItem {
         }
     }
 
-    public boolean isSulfuras() {
-        return GildedRoseItem.isSulfuras(item);
-    }
-
-    public boolean isBackstagePasses() {
-        return GildedRoseItem.isBackstagePasses(item);
-    }
-
-    public boolean isAgedBrie() {
-        return GildedRoseItem.isAgedBrie(item);
-    }
 }
