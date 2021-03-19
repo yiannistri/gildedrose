@@ -40,13 +40,13 @@ class GildedRose {
     }
 
     private void updateItemQuality(Item item, int i) {
-        if (i < 0 && !isLegendary(item)) {
-                item.quality = item.quality + i;
+        if (item.name.startsWith("Conjured") && i < 0) {
+            i = 2*i;
         }
-        if (item.quality < 50) {
-            if (item.name.startsWith("Conjured") && i < 0){
-                item.quality = item.quality + 2*i;
-            }
+        if (!isLegendary(item) && i < 0) {
+            item.quality = item.quality + i;
+        }
+        if (item.quality < 50 && i > 0 ) {
             item.quality = item.quality + i;
         }
     }
