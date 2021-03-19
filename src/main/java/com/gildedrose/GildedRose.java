@@ -37,10 +37,15 @@ class GildedRose {
                     }
                 } else {
             if (item.quality > 0) {
-                updateItemQuality(item, !item.name.equals("Sulfuras, Hand of Ragnaros"), item.quality - 1);
+                updateItemQuality(item, !isLegendary(item), item.quality - 1);
             }
         }
-        if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
+
+        checkSellByDate(item);
+    }
+
+    private void checkSellByDate(Item item) {
+        if (!isLegendary(item)) {
             item.sellIn = item.sellIn - 1;
         }
         if (item.sellIn < 0) {
@@ -49,10 +54,14 @@ class GildedRose {
             } else {
                 if (!item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                     if (item.quality > 0) {
-                        updateItemQuality(item, !item.name.equals("Sulfuras, Hand of Ragnaros"), item.quality - 1);
+                        updateItemQuality(item, !isLegendary(item), item.quality - 1);
                     }
                 } else item.quality = 0;
             }
         }
+    }
+
+    private boolean isLegendary(Item item){
+        return item.name.equals("Sulfuras, Hand of Ragnaros");
     }
 }
