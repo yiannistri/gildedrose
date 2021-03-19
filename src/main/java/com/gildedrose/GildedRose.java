@@ -20,22 +20,20 @@ class GildedRose {
 
     private void checkQuality(Item item) {
         if (item.name.equals("Aged Brie") || isBackStagePass(item)) {
-               updateItemQuality(item, item.quality +1 );
-                } else {
-            if (item.quality > 0) {
-                updateItemQuality(item, item.quality - 1);
-            }
+               updateItemQuality(item, 1 );
+        } else if (item.quality > 0) {
+            updateItemQuality(item, -1);
         }
     }
 
     private boolean isBackStagePass(Item item) {
         if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
             if (item.sellIn < 11) {
-                updateItemQuality(item,  item.quality + 1);
+                updateItemQuality(item,  1);
             }
 
             if (item.sellIn < 6) {
-                updateItemQuality(item,  item.quality + 1);
+                updateItemQuality(item,  1);
             }
             return true;
         } else return false;
@@ -43,10 +41,13 @@ class GildedRose {
 
     private void updateItemQuality(Item item, int i) {
         if (i < 0 && !isLegendary(item)) {
-                item.quality = i;
+                item.quality = item.quality + i;
         }
-        if (item.quality < 50 && i > 0) {
-            item.quality = i;
+        if (item.quality < 50) {
+            if (item.name.startsWith("Conjured") && i < 0){
+                item.quality = item.quality + 2*i;
+            }
+            item.quality = item.quality + i;
         }
     }
     
@@ -60,11 +61,11 @@ class GildedRose {
         }
         if (item.sellIn < 0) {
             if (item.name.equals("Aged Brie")) {
-                updateItemQuality(item, item.quality + 1);
+                updateItemQuality(item, 1);
             } else {
                 if (!item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                     if (item.quality > 0) {
-                        updateItemQuality(item,item.quality - 1);
+                        updateItemQuality(item, -1);
                     }
                 } else item.quality = 0;
             }
